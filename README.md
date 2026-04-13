@@ -1,28 +1,27 @@
 # CrossConnection
 
-Security-first, Axios-style HTTP client for Node.js and browsers.
+[![npm version](https://img.shields.io/npm/v/cross-connection.svg)](https://www.npmjs.com/package/cross-connection)
+[![npm downloads](https://img.shields.io/npm/dm/cross-connection.svg)](https://www.npmjs.com/package/cross-connection)
+[![license](https://img.shields.io/npm/l/cross-connection.svg)](LICENSE)
+
+A security-first Axios alternative for TypeScript, Node.js, browsers, and edge runtimes.
+
+CrossConnection gives you an Axios-like developer experience with production-focused protections such as SSRF mitigation, retry backoff, telemetry hooks, request cancellation, and safe logging.
 
 ## Links
 
+- npm package: https://www.npmjs.com/package/cross-connection
 - GitHub repository: https://github.com/pratul03/cross-connection
 - Live docs and demos: https://cross-connection-ui.vercel.app
 
-CrossConnection provides a familiar request API with hardened defaults:
+## Why CrossConnection
 
-- SSRF protections (private IP and localhost blocking)
-- Optional host allowlist and DNS rebinding checks
-- Retry with exponential backoff
-- Request and response interceptors
-- transformRequest and transformResponse hooks
-- AES-256-GCM request payload encryption
-- Optional TLS certificate fingerprint pinning in Node.js
-- Header redaction utility for safe logging
-- CancelToken and AbortSignal support
-
-## Documentation
-
-- Full guide: [docs/USAGE.md](docs/USAGE.md)
-- Axios comparison: [docs/AXIOS_COMPARISON.md](docs/AXIOS_COMPARISON.md)
+- Axios-like API with stronger secure defaults
+- Built-in retry policies with exponential backoff and jitter
+- SSRF controls for private IPs, localhost, and host allowlists
+- Interceptors, transforms, and telemetry hooks for observability
+- AbortSignal and CancelToken cancellation support
+- Header redaction helpers for safe logging
 
 ## Installation
 
@@ -37,6 +36,7 @@ import { createCrossConnection } from "cross-connection";
 
 const client = createCrossConnection({
   baseURL: "https://api.example.com",
+  timeout: 8000,
   retry: {
     retries: 2,
     baseDelayMs: 150,
@@ -44,11 +44,11 @@ const client = createCrossConnection({
   },
 });
 
-const res = await client.get<{ ok: boolean }>("/health");
-console.log(res.data.ok);
+const response = await client.get<{ ok: boolean }>("/health");
+console.log(response.data.ok);
 ```
 
-## Security Configuration
+## Secure Client Example
 
 ```ts
 import { CrossConnection } from "cross-connection";
@@ -59,25 +59,30 @@ const client = new CrossConnection({
     blockPrivateIPv6: true,
     blockLocalhost: true,
     allowHosts: ["api.example.com", "*.trusted.internal"],
-    pinnedFingerprints: ["AB:CD:EF:..."],
-    encryptRequestBody: false,
     redactHeaders: ["authorization", "cookie", "x-api-key"],
+  },
+  retry: {
+    retries: 3,
+    baseDelayMs: 120,
+    maxDelayMs: 1200,
   },
 });
 ```
 
-## API Overview
+## Feature Highlights
 
-- Methods: get, post, put, patch, delete, head, options, request
-- Interceptors:
-  - client.interceptors.request.use(onFulfilled, onRejected)
-  - client.interceptors.response.use(onFulfilled, onRejected)
-- Cancelation:
-  - AbortSignal via config.signal
-  - CancelToken via CancelToken.source()
-- Data transforms:
-  - config.transformRequest
-  - config.transformResponse
+- HTTP methods: get, post, put, patch, delete, head, options, request
+- Interceptors: client.interceptors.request.use and client.interceptors.response.use
+- Data transforms: transformRequest and transformResponse
+- Security options: SSRF guards, DNS rebinding checks, host allowlists
+- Reliability controls: retry policies, timeout handling, telemetry callbacks
+- Crypto and transport hardening: AES-256-GCM request encryption and optional TLS fingerprint pinning in Node.js
+
+## Documentation
+
+- Full guide: [docs/USAGE.md](docs/USAGE.md)
+- Axios comparison: [docs/AXIOS_COMPARISON.md](docs/AXIOS_COMPARISON.md)
+- Interactive docs site: https://cross-connection-ui.vercel.app
 
 ## Development
 
@@ -85,18 +90,6 @@ const client = new CrossConnection({
 npm install
 npm run test
 npm run build
-```
-
-## Project Structure
-
-```text
-src/
-	adapters/
-	core/
-	defaults/
-	security/
-	types.ts
-tests/
 ```
 
 ## License
