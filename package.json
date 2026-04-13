@@ -11,6 +11,10 @@
   "bugs": {
     "url": "https://github.com/pratul03/cross-connection/issues"
   },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -27,7 +31,10 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "audit:prod": "npm audit --omit=dev --audit-level=high",
+    "audit:all": "npm audit --audit-level=high",
+    "prepublishOnly": "npm run test && npm run build && npm run audit:prod"
   },
   "keywords": [
     "cross-connection",
