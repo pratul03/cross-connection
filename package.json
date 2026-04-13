@@ -1,6 +1,6 @@
 {
   "name": "cross-connection",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Security-first Axios alternative HTTP client for TypeScript, Node.js, and browsers with retries, SSRF protection, interceptors, and cancellation",
   "author": "Pratul Makae <pratulmakar02@gmail.com> (https://github.com/pratul03)",
   "homepage": "https://cross-connection-ui.vercel.app",
