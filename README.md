@@ -2,6 +2,11 @@
 
 Security-first, Axios-style HTTP client for Node.js and browsers.
 
+## Links
+
+- GitHub repository: https://github.com/pratul03/cross-connection
+- Live docs and demos: https://cross-connection-ui.vercel.app
+
 CrossConnection provides a familiar request API with hardened defaults:
 
 - SSRF protections (private IP and localhost blocking)

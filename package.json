@@ -3,6 +3,14 @@
   "version": "0.2.1",
   "description": "Security-first Axios-like HTTP client with SSRF mitigation, retry backoff, and request fingerprinting",
   "author": "Pratul Makae <pratulmakar02@gmail.com> (https://github.com/pratul03)",
+  "homepage": "https://cross-connection-ui.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pratul03/cross-connection.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pratul03/cross-connection/issues"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
