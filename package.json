@@ -1,7 +1,7 @@
 {
   "name": "cross-connection",
   "version": "0.2.2",
-  "description": "Security-first Axios-like HTTP client with SSRF mitigation, retry backoff, and request fingerprinting",
+  "description": "Security-first Axios alternative HTTP client for TypeScript, Node.js, and browsers with retries, SSRF protection, interceptors, and cancellation",
   "author": "Pratul Makae <pratulmakar02@gmail.com> (https://github.com/pratul03)",
   "homepage": "https://cross-connection-ui.vercel.app",
   "repository": {
@@ -30,8 +30,19 @@
     "test:watch": "vitest"
   },
   "keywords": [
+    "cross-connection",
+    "crossconnection",
     "http",
+    "http-client",
+    "typescript",
+    "fetch",
     "axios",
+    "axios-alternative",
+    "interceptors",
+    "cancelation",
+    "cancellation",
+    "retry-backoff",
+    "telemetry",
     "security",
     "ssrf",
     "retry"
